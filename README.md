@@ -8,26 +8,26 @@ The SSD object detection composes of 2 parts
 -->Extract feature maps, and
 -->Apply convolution filters to detect objects.
 
-Extract feature maps
+### Extract feature maps
 
 SSD uses VGG16 to extract feature maps. Then it detects objects using the Conv4_3 layer. For illustration, we draw the Conv4_3 to be 8 × 8 spatially (it should be 38 × 38). For each cell (also called location), it makes 4 object predictions.
 
-Convolutional predictors for object detection
+### Convolutional predictors for object detection
 
 SSD does not use a delegated region proposal network. Instead, it resolves to a very simple method. It computes both the location and class scores using small convolution filters. After extracting the feature maps, SSD applies 3 × 3 convolution filters for each cell to make predictions. (These filters compute the results just like the regular CNN filters.) Each filter outputs 25 channels: 21 scores for each class plus one boundary box.
 
 
 
 
-Steps of Detector:
+## Steps of Detector:
 
 
 
-Imports
+### Imports
 
 -->Importing all the requirement libraries like Numpy ,OpenCV, Tensorflow ,matplotlib....
 
-Model preparation:
+### Model preparation:
 
 -->Any model exported using the export_inference_graph.py tool can be loaded here simply by changing PATH_TO_FROZEN_GRAPH to point to a new .pb file.
 
@@ -37,7 +37,7 @@ Model preparation:
 
 -->Load a (frozen) Tensorflow model into memory.
 
-Loading label map:
+### Loading label map:
 
 -->Label maps map indices to category names, so that when our convolution network predicts 5, we know that this corresponds to airplane. Here we use internal utility functions, but anything that returns a dictionary mapping integers to appropriate string labels would be fine.
 
@@ -52,7 +52,7 @@ Loading label map:
 
 
 
-Conclusion:
+## Conclusion:
 
 SSD is a single-shot detector. It has no delegated region proposal network and predicts the boundary boxes and the classes directly from feature maps in one single pass.
 To improve accuracy, SSD introduces:
